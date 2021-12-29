@@ -19,7 +19,7 @@ package censor
 import (
 	"strconv"
 
-	"github.com/carlos-Baidu-AIP/golang-sdk/baseClient"
+	"github.com/UnparalleledBeauty/baidu-aip-golang-sdk/baseClient"
 )
 
 const __imageCensorUserDefinedUrl = "https://aip.baidubce.com/rest/2.0/solution/v1/img_censor/v2/user_defined"
@@ -51,13 +51,13 @@ func NewCloudClient(ak string, sk string) *ContentCensorClient {
 	return &client
 }
 
-func (client *ContentCensorClient) TextCensor(text string) (result string) {
+func (client *ContentCensorClient) TextCensor(text string) (string, error) {
 	data := make(map[string]string)
 	data["text"] = text
 	return baseClient.PostUrlForm(__textCensorUserDefinedUrl, data, &client.auth)
 }
 
-func (client *ContentCensorClient) ImgCensor(image string, options map[string]interface{}) (result string) {
+func (client *ContentCensorClient) ImgCensor(image string, options map[string]interface{}) (string, error) {
 	data := make(map[string]string)
 	data["image"] = image
 	for key, val := range options {
@@ -70,7 +70,7 @@ func (client *ContentCensorClient) ImgCensor(image string, options map[string]in
 }
 
 // ImageCensorCommonAccurateBasic 通用场景文字识别-通用文字识别（高精度版）
-func (client *ContentCensorClient) ImageCensorCommonAccurateBasic(image string, options map[string]interface{}) (result string) {
+func (client *ContentCensorClient) ImageCensorCommonAccurateBasic(image string, options map[string]interface{}) (string, error) {
 	data := make(map[string]string)
 	data["image"] = image
 	for key, val := range options {
@@ -82,7 +82,7 @@ func (client *ContentCensorClient) ImageCensorCommonAccurateBasic(image string, 
 	return baseClient.PostUrlForm(__imageCensorCommonAccurateBasicUrl, data, &client.auth)
 }
 
-func (client *ContentCensorClient) ImgCensorUrl(imgUrl string, options map[string]interface{}) (result string) {
+func (client *ContentCensorClient) ImgCensorUrl(imgUrl string, options map[string]interface{}) (string, error) {
 	data := make(map[string]string)
 	data["imgUrl"] = imgUrl
 	for key, val := range options {
@@ -94,7 +94,7 @@ func (client *ContentCensorClient) ImgCensorUrl(imgUrl string, options map[strin
 	return baseClient.PostUrlForm(__imageCensorUserDefinedUrl, data, &client.auth)
 }
 
-func (client *ContentCensorClient) VoiceCensorUrl(url string, fmt string, options map[string]interface{}) (result string) {
+func (client *ContentCensorClient) VoiceCensorUrl(url string, fmt string, options map[string]interface{}) (string, error) {
 	data := make(map[string]string)
 	data["url"] = url
 	data["fmt"] = fmt
@@ -107,7 +107,7 @@ func (client *ContentCensorClient) VoiceCensorUrl(url string, fmt string, option
 	return baseClient.PostUrlForm(__voiceCensorUserDefinedUrl, data, &client.auth)
 }
 
-func (client *ContentCensorClient) VoiceCensor(base64 string, fmt string, options map[string]interface{}) (result string) {
+func (client *ContentCensorClient) VoiceCensor(base64 string, fmt string, options map[string]interface{}) (string, error) {
 	data := make(map[string]string)
 	data["base64"] = base64
 	data["fmt"] = fmt
@@ -120,7 +120,7 @@ func (client *ContentCensorClient) VoiceCensor(base64 string, fmt string, option
 	return baseClient.PostUrlForm(__voiceCensorUserDefinedUrl, data, &client.auth)
 }
 
-func (client *ContentCensorClient) VideoCensor(name string, videoUrl string, extId string, options map[string]interface{}) (result string) {
+func (client *ContentCensorClient) VideoCensor(name string, videoUrl string, extId string, options map[string]interface{}) (string, error) {
 	data := make(map[string]string)
 	data["name"] = name
 	data["videoUrl"] = videoUrl
