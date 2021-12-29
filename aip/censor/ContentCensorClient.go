@@ -19,10 +19,13 @@ package censor
 import (
 	"strconv"
 
-	"github.com/Baidu-AIP/golang-sdk/baseClient"
+	"github.com/carlos-Baidu-AIP/golang-sdk/baseClient"
 )
 
 const __imageCensorUserDefinedUrl = "https://aip.baidubce.com/rest/2.0/solution/v1/img_censor/v2/user_defined"
+
+// 通用场景文字识别-通用文字识别（高精度版）
+const __imageCensorCommonAccurateBasicUrl = "https://aip.baidubce.com/rest/2.0/ocr/v1/accurate_basic"
 
 const __textCensorUserDefinedUrl = "https://aip.baidubce.com/rest/2.0/solution/v1/text_censor/v2/user_defined"
 
@@ -64,6 +67,19 @@ func (client *ContentCensorClient) ImgCensor(image string, options map[string]in
 		}
 	}
 	return baseClient.PostUrlForm(__imageCensorUserDefinedUrl, data, &client.auth)
+}
+
+// ImageCensorCommonAccurateBasic 通用场景文字识别-通用文字识别（高精度版）
+func (client *ContentCensorClient) ImageCensorCommonAccurateBasic(image string, options map[string]interface{}) (result string) {
+	data := make(map[string]string)
+	data["image"] = image
+	for key, val := range options {
+		switch val := val.(type) {
+		case int:
+			data[key] = strconv.Itoa(val)
+		}
+	}
+	return baseClient.PostUrlForm(__imageCensorCommonAccurateBasicUrl, data, &client.auth)
 }
 
 func (client *ContentCensorClient) ImgCensorUrl(imgUrl string, options map[string]interface{}) (result string) {
